@@ -17,6 +17,8 @@
         </div>
         <div v-else>
             <p>Loading...</p>
+            <p>{{id}}</p>
+
         </div>
     </div>
 </template>
@@ -25,6 +27,9 @@
 import axios from 'axios';
 
 export default {
+     props: {
+        id: Number,
+    },
     name: 'Content',
     data() {
         return {
@@ -32,29 +37,52 @@ export default {
             commits: [],
         };
     },
+    
+    watch: {
+        id: async function () {
+            const token = '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'; // Replace with your actual Bearer token
+            const apiUrl = `https://api.github.com/repositories/${this.id}`;
+            const owner = 'github_username'; // Replace with the owner's username or organization name
+            const repo = 'repository_name';
+            if (this.id) {
+                console.log("fech");
+                axios({
+                    method: 'get',
+                    url: apiUrl,
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                }).then(response => {
+                    this.repo = response.data;
+                    const owner = this.repo.owner.login;
+                    const repo = this.repo.full_name;
+
+                    axios({
+                        method: 'get',
+                        url: `https://api.github.com/repos/${repo}/commits`,
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                        }
+                    }).then(response => {
+                        console.log(response.data);
+                    })
+                })
+            }
+        }
+    },
     mounted() {
-        const owner = 'owner_username'; // Replace with the owner's GitHub username
-        const repoName = 'repository_name'; // Replace with the repository's name
-
-        // Fetch repository details
-        axios
-            .get(`https://api.github.com/repos/${owner}/${repoName}`)
-            .then(response => {
-                this.repo = response.data;
-            })
-            .catch(error => {
-                console.error('Error fetching repository details:', error);
-            });
-
-        // Fetch commit details
-        axios
-            .get(`https://api.github.com/repos/${owner}/${repoName}/commits`)
-            .then(response => {
-                this.commits = response.data;
-            })
-            .catch(error => {
-                console.error('Error fetching commit details:', error);
-            });
+        const token = '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'; // Replace with your actual Bearer token
+        const apiUrl = `https://api.github.com/user`;
+        axios({
+            method: 'get',
+            url: apiUrl,
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        }).then(response => {
+            this.repo = response.data;
+            console.log(this.repo);
+        })
     },
 };
 </script>
