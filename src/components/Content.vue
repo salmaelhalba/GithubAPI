@@ -7,7 +7,7 @@
             <p>Language: {{ repo.language }}</p>
             <p>Stars: {{ repo.stargazers_count }}</p>
 
-            
+
             <h2>Commit Details</h2>
             <ul>
                 <li v-for="commit in commits" :key="commit.sha">
@@ -40,7 +40,10 @@ export default {
 
     watch: {
         id: async function () {
-            const token = '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'; // Replace with your actual Bearer token
+            const clientID = 'bedd18f6c7359755a50e';
+            const secretID = 'ef3548b079317a70edfca8c951fde02f3aea6e84';
+
+           
             const apiUrl = `https://api.github.com/repositories/${this.id}`;
             const owner = 'github_username'; // Replace with the owner's username or organization name
             const repo = 'repository_name';
