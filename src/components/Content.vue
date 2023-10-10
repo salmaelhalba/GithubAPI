@@ -6,8 +6,8 @@
             <p>Description: {{ repo.description }}</p>
             <p>Language: {{ repo.language }}</p>
             <p>Stars: {{ repo.stargazers_count }}</p>
-            <!-- Add more repository details as needed -->
 
+            
             <h2>Commit Details</h2>
             <ul>
                 <li v-for="commit in commits" :key="commit.sha">
@@ -37,15 +37,15 @@ export default {
             commits: [],
         };
     },
-    
+
     watch: {
         id: async function () {
-            const token = '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'; // Replace with your actual Bearer token
+            const token = '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'; // Replace with your actual Bearer token
             const apiUrl = `https://api.github.com/repositories/${this.id}`;
             const owner = 'github_username'; // Replace with the owner's username or organization name
             const repo = 'repository_name';
             if (this.id) {
-                console.log("fech");
+                console.log("fetch");
                 axios({
                     method: 'get',
                     url: apiUrl,
@@ -87,6 +87,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* Your component's CSS styles here */
-</style>
+
