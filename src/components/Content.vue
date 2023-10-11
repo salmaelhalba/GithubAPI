@@ -23,71 +23,60 @@
     </div>
 </template>
 
-<script>
+
+<script setup lang="js">
+import { ref, watch, onMounted } from 'vue';
 import axios from 'axios';
 
-export default {
-     props: {
-        id: Number,
-    },
-    name: 'Content',
-    data() {
-        return {
-            repo: null,
-            commits: [],
-        };
-    },
+const id = ref(null);
+const repo = ref(null);
+const commits = ref([]);
+const token = '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'; // Replace with your actual Bearer token
 
-    watch: {
-        id: async function () {
-            const clientID = 'bedd18f6c7359755a50e';
-            const secretID = 'ef3548b079317a70edfca8c951fde02f3aea6e84';
+const apiUrl = 'https://api.github.com/user';
 
-           
-            const apiUrl = `https://api.github.com/repositories/${this.id}`;
-            const owner = 'github_username'; // Replace with the owner's username or organization name
-            const repo = 'repository_name';
-            if (this.id) {
-                console.log("fetch");
-                axios({
-                    method: 'get',
-                    url: apiUrl,
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
-                }).then(response => {
-                    this.repo = response.data;
-                    const owner = this.repo.owner.login;
-                    const repo = this.repo.full_name;
-
-                    axios({
-                        method: 'get',
-                        url: `https://api.github.com/repos/${repo}/commits`,
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                        }
-                    }).then(response => {
-                        console.log(response.data);
-                    })
-                })
-            }
-        }
-    },
-    mounted() {
-        const token = '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'; // Replace with your actual Bearer token
-        const apiUrl = `https://api.github.com/user`;
-        axios({
-            method: 'get',
-            url: apiUrl,
+onMounted(async () => {
+    try {
+        const response = await axios.get(apiUrl, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
-        }).then(response => {
-            this.repo = response.data;
-            console.log(this.repo);
-        })
-    },
-};
+        });
+        repo.value = response.data;
+        console.log(repo.value);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+watch(id, async (newId) => {
+    if (newId) {
+        const repoApiUrl = `https://api.github.com/repositories/${newId}`;
+
+        try {
+            const response = await axios.get(repoApiUrl, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            repo.value = response.data;
+
+            const owner = repo.value.owner.login;
+            const repoName = repo.value.name;
+
+            const commitsApiUrl = `https://api.github.com/repos/${owner}/${repoName}/commits`;
+
+            const commitsResponse = await axios.get(commitsApiUrl, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+
+            commits.value = commitsResponse.data;
+            console.log(commits.value);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+});
 </script>
-
-
