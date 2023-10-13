@@ -1,23 +1,25 @@
 <template>
-  <header class="sticky top-0 bg-color-primary">
-    <div>
-      <div></div>
-      <h2>Select an Option:</h2>
-      <select v-model="selectedRepo" @change="handleChange">
-        <option v-for="repo in repos" :key="repo.id" :value="repo.name">
-          <div>
-            <p @click="console.log('test')">{{ repo.name }}</p>
-          </div>
-        </option>
-      </select>
+  <section class="flex items-center justify-center flex-col font-mono h-screen space-y-12">
+    <div class="w-full flex space-x-4 justify-center">
+      <h2 class="text-7xl text-youcan-600 font-bold">YouCan</h2>
+      <h2 class="text-7xl text-slate-900 font-bold">GitHub</h2>
     </div>
-    <Content :id="selectedRepo" />
-    <button @click="login()">Login</button>
-  </header>
+    <div class="w-96 text-center">
+      <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
+      exercitationem atque aliquam error <span class="font-bold text-youcan-600">obcaecati</span> nostrum natus vitae aperiam
+      repudiandae quibusdam.
+    </p>
+    </div>
+    <button
+      @click="login()"
+      class="bg-gradient-to-b from-youcan-700 to-youcan-600 py-3.5 text-sm px-16 rounded-lg text-youcan-50 font-semibold tracking-wide capitalize hover:shadow-lg hover:shadow-youcan-400 hover:scale-[1.02] transition-all duration-300"
+    >
+      Login with your github account ?
+    </button>
+  </section>
 </template>
 <script setup lang="js">
-import { ref } from "vue";
-import Content from './Content.vue'
 
 const clientID = "bedd18f6c7359755a50e";
 
@@ -25,32 +27,6 @@ function login() {
     window.location.assign('https://github.com/login/oauth/authorize?client_id='+clientID)
 }
 
-
-
-
-
-
-
-const repos = ref({})
-
-
-async function handleChange(e) {
-    const name = e.target.value;
-
-    const allRepos = repos._value;
-
-
-    const currentRepo = await allRepos.find(repo => repo.name == name)
-
-    console.log();
-    const response = await octokit.request('GET /repos/{owner}/{repo}', {
-        owner: currentRepo.full_name.split('/')[0],
-        repo: currentRepo.full_name.split('/')[1]
-    });
-
-    console.log(response);
-
-}
 
 const apiUrl = 'https://api.github.com/user/repos'; // Replace with your API endpoint
 </script>
