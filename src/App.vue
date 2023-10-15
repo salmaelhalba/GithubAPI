@@ -53,7 +53,16 @@ async function fetchCommits(fullName) {
     "https://api.github.com/repos/" + fullName + "/commits"
   );
 
+  console.log(result);
+
+  if (result.status === 403) {
+    alert("rate limit exceeded");
+
+    return;
+  }
   const allcommits = await result.json();
+  console.log(allcommits);
+  commits.value = [];
 
   allcommits.map(async (commit) => {
     const branchFetch = await fetch(

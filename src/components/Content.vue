@@ -1,3 +1,10 @@
+<script setup lang="js">
+
+import folderSvg from "../assets/folder.svg"
+
+const props = defineProps({ fullName: String, commitsUrl: String, id: Number, isBranch: Boolean, fetchCommits: Object })
+</script>
+
 <template>
   <div class="w-full font-mono flex gap-8 justify-center items-center">
     <div
@@ -12,10 +19,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="js">
-
-import folderSvg from "../assets/folder.svg"
-
-const props = defineProps({ fullName: String, commitsUrl: String, id: Number, isBranch: Boolean, fetchCommits: Object })
-</script>

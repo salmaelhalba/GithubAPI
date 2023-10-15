@@ -1,3 +1,15 @@
+<script setup lang="js">
+
+const clientID = "bedd18f6c7359755a50e";
+
+function login() {
+    window.location.assign('https://github.com/login/oauth/authorize?client_id='+clientID)
+}
+
+
+const apiUrl = 'https://api.github.com/user/repos'; // Replace with your API endpoint
+</script>
+
 <template>
   <section
     class="flex items-center justify-center flex-col font-mono h-screen space-y-12"
@@ -22,14 +34,3 @@
     </button>
   </section>
 </template>
-<script setup lang="js">
-
-const clientID = "bedd18f6c7359755a50e";
-
-function login() {
-    window.location.assign('https://github.com/login/oauth/authorize?client_id='+clientID)
-}
-
-
-const apiUrl = 'https://api.github.com/user/repos'; // Replace with your API endpoint
-</script>
