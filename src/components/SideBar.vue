@@ -1,15 +1,18 @@
 <template>
-  <section class="flex items-center justify-center flex-col font-mono h-screen space-y-12">
+  <section
+    class="flex items-center justify-center flex-col font-mono h-screen space-y-12"
+  >
     <div class="w-full flex space-x-4 justify-center">
       <h2 class="text-7xl text-youcan-600 font-bold">YouCan</h2>
       <h2 class="text-7xl text-slate-900 font-bold">GitHub</h2>
     </div>
     <div class="w-96 text-center">
       <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-      exercitationem atque aliquam error <span class="font-bold text-youcan-600">obcaecati</span> nostrum natus vitae aperiam
-      repudiandae quibusdam.
-    </p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
+        exercitationem atque aliquam error
+        <span class="font-bold text-youcan-600">obcaecati</span> nostrum natus
+        vitae aperiam repudiandae quibusdam.
+      </p>
     </div>
     <button
       @click="login()"
