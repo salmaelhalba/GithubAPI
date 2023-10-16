@@ -20,10 +20,11 @@ const apiUrl = 'https://api.github.com/user/repos'; // Replace with your API end
     </div>
     <div class="w-96 text-center">
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-        exercitationem atque aliquam error
-        <span class="font-bold text-youcan-600">obcaecati</span> nostrum natus
-        vitae aperiam repudiandae quibusdam.
+        The application I have developed as part of my coding challenge for
+        <span class="font-bold text-youcan-600">YouCan</span>
+        is designed to facilitate the process of accessing your GitHub account,
+        enabling you to conveniently view all your repositories and commits in
+        one place.
       </p>
     </div>
     <button
