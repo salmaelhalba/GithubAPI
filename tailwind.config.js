@@ -6,7 +6,7 @@ export default {
       colors: {
         "color-primary": "#00668A",
         "color-secondary": "#004E71",
-        "youcan": {
+        youcan: {
           50: "#fbf4f9",
           100: "#f9eaf4",
           200: "#f4d6e9",
@@ -24,4 +24,3 @@ export default {
   },
   plugins: [],
 };
-
